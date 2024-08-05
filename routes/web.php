@@ -2,12 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // User All Route and Frontend
-
 Route::get('/', [UserController::class, 'Index'])->name('index');
 
 Route::get('/dashboard', function () {
@@ -77,8 +77,16 @@ Route::controller(CategoryController::class)->group(function () {
 Route::get('/become/instructor', [AdminController::class, 'BeComeInstructor'])->name('become.instructor');
 Route::post('/instructor/register', [AdminController::class, 'InstructorRegister'])->name('instructor.register');
 
-// Instructor All Route
+// Instructor Route in Admin
 Route::controller(AdminController::class)->group(function () {
     Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
     Route::post('/update/user/status', "UpdateUserStatus")->name('update.user.status');
+});
+
+// Instructor All Route
+Route::controller(CourseController::class)->group(function () {
+    Route::get('/all/course', 'AllCourse')->name('all.course');
+    Route::get('/add/course', 'AddCourse')->name('add.course');
+
+    Route::post('/store/course', 'StoreCourse')->name('store.course');
 });
