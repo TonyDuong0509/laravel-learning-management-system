@@ -6,6 +6,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+// User All Route and Frontend
 
 Route::get('/', [UserController::class, 'Index'])->name('index');
 
@@ -36,6 +37,7 @@ Route::middleware(['auth', 'roles:admin'])->group(function () {
 });
 
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+
 
 // Instructor Group Middleware  
 Route::middleware(['auth', 'roles:instructor'])->group(function () {
@@ -70,4 +72,13 @@ Route::controller(CategoryController::class)->group(function () {
 
     Route::post('/store/subcategory', 'StoreSubCategory')->name('store.subcategory');
     Route::post('/update/subcategory', 'UpdateSubCategory')->name('update.subcategory');
+});
+
+Route::get('/become/instructor', [AdminController::class, 'BeComeInstructor'])->name('become.instructor');
+Route::post('/instructor/register', [AdminController::class, 'InstructorRegister'])->name('instructor.register');
+
+// Instructor All Route
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
+    Route::post('/update/user/status', "UpdateUserStatus")->name('update.user.status');
 });
