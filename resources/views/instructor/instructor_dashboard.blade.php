@@ -25,6 +25,9 @@
 	<link rel="stylesheet" href="{{asset('backend/assets/css/dark-theme.css')}}"/>
 	<link rel="stylesheet" href="{{asset('backend/assets/css/semi-dark.css')}}"/>
 	<link rel="stylesheet" href="{{asset('backend/assets/css/header-colors.css')}}"/>
+	<!-- Datatable -->
+	<link href="{{ asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+	<!-- End Datatable -->
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
 	<title>Instructor Dashboard</title>
 </head>
@@ -68,9 +71,32 @@
 	<script src="{{asset('backend/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{asset('backend/assets/js/app.js')}}"></script>
+
+	<script src="{{ asset('backend/assets/js/validate.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="{{ asset('backend/assets/js/code.js') }}"></script>
+
 	<script>
 		new PerfectScrollbar(".app-container")
 	</script>
+
+	<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		} );
+	</script>
+
+	<script src="https://cdn.tiny.cloud/1/0jgy0uwuq2yo3kctgi53085w78vcao63lerx1cr8u4bgsj13/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+	<script>
+	tinymce.init({
+		selector: 'textarea#myeditorinstance', 
+		plugins: 'code table lists',
+		toolbar: 'undo redo | blocks | bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | code | table'
+	});
+	</script>
+
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 	<script>
