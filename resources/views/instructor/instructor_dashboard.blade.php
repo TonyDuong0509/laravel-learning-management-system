@@ -88,7 +88,7 @@
 		} );
 	</script>
 
-	<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+	<script src="https://cdn.tiny.cloud/1/0jgy0uwuq2yo3kctgi53085w78vcao63lerx1cr8u4bgsj13/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 	<script>
 	tinymce.init({
 		selector: 'textarea#myeditorinstance', 

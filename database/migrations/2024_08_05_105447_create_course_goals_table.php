@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('course_goals', function (Blueprint $table) {
             $table->id();
             $table->integer('course_id');
-            $table->text('course_name')->nullable();
+            $table->text('goal_name')->nullable();
 
             $table->timestamps();
         });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('course_image')->nullable();
             $table->text('course_title')->nullable();
             $table->text('course_name')->nullable();
-            $table->integer('course_name_slug')->nullable();
+            $table->text('course_name_slug')->nullable();
 
             $table->longText('description')->nullable();
             $table->string('video')->nullable();

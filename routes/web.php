@@ -87,6 +87,13 @@ Route::controller(AdminController::class)->group(function () {
 Route::controller(CourseController::class)->group(function () {
     Route::get('/all/course', 'AllCourse')->name('all.course');
     Route::get('/add/course', 'AddCourse')->name('add.course');
+    Route::get('/subcategory/ajax/{category_id}', 'GetSubCategory');
+    Route::get('/edit/course/{id}', 'EditCourse')->name('edit.course');
+    Route::get('/delete/course/{id}', 'DeleteCourse')->name('delete.course');
 
     Route::post('/store/course', 'StoreCourse')->name('store.course');
+    Route::post('/update/course', 'UpdateCourse')->name('update.course');
+    Route::post('/update/course/image', 'UpdateCourseImage')->name('update.course.image');
+    Route::post('/update/course/video', 'UpdateCourseVideo')->name('update.course.video');
+    Route::post('/update/course/goal', 'UpdateCourseGoal')->name('update.course.goal');
 });

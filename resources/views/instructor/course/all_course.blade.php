@@ -43,7 +43,7 @@
                                     {{ $key++ }}
                                 </td>
                                 <td>
-                                    <img src="{{ $item->course_image }}" alt="{{ $item->course_title }}" style="width: 70px; height:40px;">
+                                    <img src="{{ url($item->course_image) }}" alt="{{ $item->course_title }}" style="width: 70px; height:40px;">
                                 </td>
                                 <td>
                                     {{ $item->course_name }}    
@@ -58,8 +58,8 @@
                                     {{ $item->discount_price }}       
                                 </td> 
                                 <td>
-        <a href="" class="btn btn-info px-4">Edit </a>   
-        <a href="" class="btn btn-danger px-4" id="delete">Delete </a>                    
+        <a href="{{ route('edit.course', $item->id) }}" class="btn btn-info px-4">Edit </a>   
+        <a href="{{ route('delete.course', $item->id) }}" class="btn btn-danger px-4" id="delete">Delete </a>                    
                                 </td>
                             </tr>
                         @endforeach
