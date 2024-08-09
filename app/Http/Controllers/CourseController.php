@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Course;
 use App\Models\Course_goal;
+use App\Models\CourseLecture;
+use App\Models\CourseSection;
 use App\Models\SubCategory;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use PHPUnit\Framework\Constraint\Count;
 
 class CourseController extends Controller
 {
@@ -172,7 +173,7 @@ class CourseController extends Controller
 
     public function UpdateCourseVideo(Request $request)
     {
-        $course_id = $request->course_id;
+        $course_id = $request->id;
         $old_video = $request->old_video;
 
         $video = $request->file('video');
@@ -238,6 +239,103 @@ class CourseController extends Controller
             'message' => 'Course Deleted Successfully',
             'alert-type' => 'success'
         );
+        return redirect()->back()->with($notification);
+    }
+
+    public function AddCourseLecture($id)
+    {
+        $course = Course::find($id);
+
+        $section = CourseSection::where('course_id', '=', $id)->latest()->get();
+
+        return view('instructor.course.section.add_course_lecture', compact(
+            'course',
+            'section',
+        ));
+    }
+
+    public function AddCourseSection(Request $request)
+    {
+        $course_id = $request->id;
+
+        CourseSection::insert([
+            'course_id' => $course_id,
+            'section_title' => $request->section_title,
+        ]);
+
+        $notification = array(
+            'message' => 'Course Section Added Successfully',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
+    public function SaveLecture(Request $request)
+    {
+        $lecture = new CourseLecture();
+        $lecture->course_id = $request->course_id;
+        $lecture->section_id = $request->section_id;
+        $lecture->lecture_title = $request->lecture_title;
+        $lecture->url = $request->lecture_url;
+        $lecture->content = $request->content;
+        $lecture->save();
+
+        return response()->json(['Success' => 'Lecture saved successfully !']);
+    }
+
+    public function EditLecture($id)
+    {
+        $c_lecture = CourseLecture::find($id);
+
+        return view('instructor.course.lecture.edit_course_lecture', compact(
+            'c_lecture',
+        ));
+    }
+
+    public function UpdateCourseLecture(Request $request)
+    {
+        $id = $request->id;
+
+        CourseLecture::find($id)->update([
+            'lecture_title' => $request->lecture_title,
+            'url' => $request->url,
+            'content' => $request->content,
+        ]);
+
+        $notification = array(
+            'message' => "Course Lecture updated successfully",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function DeleteLecture($id)
+    {
+        CourseLecture::find($id)->delete();
+
+        $notification = array(
+            'message' => "Deleted successfully",
+            'alert-type' => 'success',
+        );
+
+        return redirect()->back()->with($notification);
+    }
+
+    public function DeleteSection($id)
+    {
+        $section = CourseSection::find($id);
+        if ($section) {
+            $section->lectures()->delete();
+
+            $section->delete();
+        }
+
+        $notification = array(
+            'message' => "Deleted successfully",
+            'alert-type' => 'success',
+        );
+
         return redirect()->back()->with($notification);
     }
 }
