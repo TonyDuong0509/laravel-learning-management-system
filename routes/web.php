@@ -97,3 +97,15 @@ Route::controller(CourseController::class)->group(function () {
     Route::post('/update/course/video', 'UpdateCourseVideo')->name('update.course.video');
     Route::post('/update/course/goal', 'UpdateCourseGoal')->name('update.course.goal');
 });
+
+// Course Section and Lecture All Route
+Route::controller(CourseController::class)->group(function () {
+    Route::get('/add/course/lecture/{id}', 'AddCourseLecture')->name('add.course.lecture');
+    Route::get('/edit/lecture/{id}', 'EditLecture')->name('edit.lecture');
+    Route::get('/delete/lucture/{id}', 'DeleteLecture')->name('delete.lecture');
+
+    Route::post('/add/course/section/', 'AddCourseSection')->name('add.course.section');
+    Route::post('/save-lecture', 'SaveLecture')->name('save-lecture');
+    Route::post('/update/course/lecture', 'UpdateCourseLecture')->name('update.course.lecture');
+    Route::post('/delete/section/{id}', 'DeleteSection')->name('delete.section');
+});

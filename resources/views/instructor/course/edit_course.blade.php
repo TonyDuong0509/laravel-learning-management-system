@@ -188,7 +188,7 @@
         <div class="card-body">
             <form action="{{ route('update.course.video') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-            <input type="hidden" name="video" value="{{ $course->id }}">
+            <input type="hidden" name="id" value="{{ $course->id }}">
             <input type="hidden" name="old_video" value="{{ $course->video }}">
 
             <div class="row">
