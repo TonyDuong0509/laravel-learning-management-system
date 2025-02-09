@@ -4,14 +4,11 @@ namespace Modules;
 
 use Carbon\Laravel\ServiceProvider;
 use Illuminate\Support\Facades\File;
-use Modules\User\src\Http\Middlewares\DemoMiddleware;
 use Modules\User\src\Repositories\UserRepository;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    private $middlewares = [
-        'demo' => DemoMiddleware::class
-    ];
+    private $middlewares = [];
 
     private $commands = [];
 
